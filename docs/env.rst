@@ -15,12 +15,19 @@ Here we document the environment_ the tasks use.
 Env Vars
 ========
 
+**root_dir**
+	Repository root directory.
+
 **version**
 	Version identifier of the project.
 
 **package_name**
 	Package name of the project.  This is used to create dist package
 	file names.
+
+**build_dir**
+	Build artefact directory.  All build packages are placed here.  Note,
+	this is not the distribution directory.
 
 **doc_package**
 	Documentation package name.

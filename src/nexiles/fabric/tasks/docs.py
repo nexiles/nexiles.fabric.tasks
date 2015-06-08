@@ -23,7 +23,7 @@ def package():
 @task
 def preview():
     """preview project documentation"""
-    webbrowser.open("file://{}/docs/_build/html/index.html".format(os.getcwd()))
+    webbrowser.open("file://{root_dir}/docs/_build/html/index.html".format(**env.nexiles))
 
 @task
 def publish():

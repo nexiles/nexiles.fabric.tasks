@@ -18,7 +18,7 @@ def github():
 
     """
     local("github-release release -u nexiles -r {0} --tag v{1} --name '{0} -- v{1}'".format(env.nexiles.package_name, env.nexiles.version))
-    local("github-release upload -u nexiles -r {0} --tag v{1} --name documentation --file {1}".format(env.nexiles.version, env.nexiles.doc_package))
+    local("github-release upload -u nexiles -r {0} --tag v{1} --name documentation --file {2}".format(env.nexiles.package_name, env.nexiles.version, env.nexiles.doc_package))
 
 @task
 def pypi():
