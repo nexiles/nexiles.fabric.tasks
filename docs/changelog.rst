@@ -10,7 +10,7 @@ Change Log
 Features
 --------
 
-none yet.
+- Added sphinx tasks. :ref:`module_docs`
 
 Enhancements
 ------------

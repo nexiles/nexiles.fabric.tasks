@@ -9,6 +9,7 @@ Contents
    :maxdepth: 2
 
    introduction.rst
+   modules/index
    development.rst
    changelog.rst
 
