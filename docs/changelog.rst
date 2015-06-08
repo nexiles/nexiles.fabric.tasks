@@ -5,12 +5,20 @@ Change Log
 ==========
 
 0.1.1 - unreleased
-------------------
+==================
 
-no changes yet
+Features
+--------
 
-0.1 - 2015-06-08
-----------------
+- Added release tasks. :ref:`module_release`
+
+- Added utils module. :ref:`module_utils`
+
+- Added environment docs. :ref:`env`
+
+
+0.1.0 - 2015-06-08
+================
 
 Features
 --------

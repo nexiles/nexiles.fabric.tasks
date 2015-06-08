@@ -3,6 +3,11 @@ from fabric.api import task
 
 from . import log
 
+DEFAULT_ENV = {
+    # Do **NOT** allow pypi publishing by default.
+    "public_source": False,
+}
+
 class NexilesEnv(dict):
     """NexilesEnv
 
@@ -12,6 +17,7 @@ class NexilesEnv(dict):
 
     def __init__(self, **kw):
         log.info("Initializing environment.")
+        self.update(**DEFAULT_ENV)
         self.update(**kw)
 
     def update(self, **kw):
