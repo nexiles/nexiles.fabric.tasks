@@ -5,6 +5,7 @@ from fabric.api import env
 from nexiles.fabric.tasks import docs
 from nexiles.fabric.tasks import utils
 from nexiles.fabric.tasks import release
+from nexiles.fabric.tasks import environment
 
 PACKAGE_NAME = "nexiles.fabric.tasks"
 VERSION      = utils.get_version_from_setup_py()
@@ -16,7 +17,7 @@ DIST_DIR     = "~/develop/nexiles/dist/{PACKAGE_NAME}/{PACKAGE_NAME}-{VERSION}".
 
 SRC_PACKAGE  = "{BUILD_DIR}/{PACKAGE_NAME}-{VERSION}.tar.gz".format(**globals())
 DOC_PACKAGE  = "{BUILD_DIR}/{PACKAGE_NAME}-doc-{VERSION}.tar.gz".format(**globals())
-PUBLIC_DIR   = "/Volumes/skynet-wt-10-2/ptc/Windchill_10.2/HTTPServer/htdocs/docs/{PACKAGE_NAME}".format(**globals()),
+PUBLIC_DIR   = "/Volumes/skynet-wt-10-2/ptc/Windchill_10.2/HTTPServer/htdocs/docs/{PACKAGE_NAME}".format(**globals())
 
 env.nexiles.update(
     public_source=True,
