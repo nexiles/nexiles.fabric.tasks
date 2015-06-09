@@ -4,6 +4,14 @@
 Change Log
 ==========
 
+0.1.2 - unreleased
+==================
+
+Features
+--------
+
+- Added `Requires` decorator :ref:`module_utils`
+
 0.1.1 - 2015-06-09
 ==================
 
