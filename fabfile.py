@@ -1,6 +1,9 @@
 import os
 
 from fabric.api import env
+from fabric.api import task
+from fabric.api import local
+from fabric.api import execute
 
 from nexiles.fabric.tasks import docs
 from nexiles.fabric.tasks import utils
@@ -27,3 +30,20 @@ env.nexiles.update(
     doc_package=DOC_PACKAGE,
     doc_public_dir=PUBLIC_DIR
 )
+
+@task
+def build():
+    execute(docs.build)
+    execute(docs.package)
+    local("python setup.py clean sdist develop")
+
+@task
+def dist():
+    execute(docs.publish)
+    # execute(dist.dist)
+
+def full_monty():
+    execute(build)
+    execute(dist)
+    execute(release.github)
+    execute(release.pypi)
