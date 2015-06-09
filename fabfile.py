@@ -42,6 +42,7 @@ def dist():
     execute(docs.publish)
     # execute(dist.dist)
 
+@task
 def full_monty():
     execute(build)
     execute(dist)
