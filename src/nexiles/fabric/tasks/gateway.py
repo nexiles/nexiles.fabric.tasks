@@ -88,6 +88,13 @@ def get_package_name(package, customer=None, python="2.7"):
     )
 
 
+def get_package_eggs(package):
+    out = []
+    for customer in package.customers:
+        out.append(os.path.join(env.nexiles.build_dir, get_package_name(package, customer=customer)))
+    return out
+
+
 @contextlib.contextmanager
 def licensed_package(package, customer):
     """"""
@@ -126,14 +133,22 @@ LICENSE = {
 
 
 @task
+@utils.Requires(build_dir=str)
+def list_eggs(which=None):
+    """List gateway module eggs to be built."""
+    package = get_package_env(which)
+    eggs = get_package_eggs(package)
+    for egg in eggs:
+        log.info(egg)
+
+
+@task
 @utils.Requires(build_dir=str, WT_HOME=str, WT_HOST=str, WTUSER=str, WTPASS=str, JYTHON_HOME=str)
 def build_eggs(which=None):
     """Build gateway module."""
+    package = get_package_env(which)
     if which is None:
-        package = get_package_env()
         which = env.nexiles.package_name
-    else:
-        package = get_package_env(which)
 
     log.info("Building {} version {}".format(which, package.version))
 
