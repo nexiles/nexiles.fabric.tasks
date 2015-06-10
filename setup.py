@@ -38,7 +38,10 @@ setup(name='nexiles.fabric.tasks',
                         'fabric',
                         # -*- Extra requirements: -*-
                         ],
-     entry_points={
+      extras_require = {
+        "windchill": ["nexiles.tools.api"],
+      },
+      entry_points={
           # 'console_scripts': [
           #     'nxtools = nexiles.fabric.tasks.main:main',
           #     ]
