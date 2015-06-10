@@ -30,16 +30,19 @@ env.nexiles.update(
     doc_public_dir=PUBLIC_DIR
 )
 
+
 @task
 def build():
     execute(docs.build)
     execute(docs.package)
     local("python setup.py clean sdist develop")
 
+
 @task
 def dist():
     execute(docs.publish)
     # execute(dist.dist)
+
 
 @task
 def full_monty():
@@ -47,3 +50,5 @@ def full_monty():
     execute(dist)
     execute(release.github)
     execute(release.pypi)
+
+# EOF
