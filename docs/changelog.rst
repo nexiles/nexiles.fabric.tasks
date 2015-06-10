@@ -4,6 +4,17 @@
 Change Log
 ==========
 
+0.1.3 - unreleased
+==================
+
+Features
+--------
+
+- Added `gateway` module and tasks. :ref:`module_gateway`
+
+- Added `windchill` module and tasks. :ref:`module_windchill`
+
+
 0.1.2 - 2015-06-09
 ==================
 
