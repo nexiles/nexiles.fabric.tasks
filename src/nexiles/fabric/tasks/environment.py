@@ -1,3 +1,6 @@
+import os
+import json
+
 from fabric.api import env
 from fabric.api import task
 
@@ -8,6 +11,7 @@ DEFAULT_ENV = {
     "public_source": False,
 }
 
+
 class NexilesEnv(dict):
     """NexilesEnv
 
@@ -16,7 +20,6 @@ class NexilesEnv(dict):
     """
 
     def __init__(self, **kw):
-        log.info("Initializing environment.")
         self.update(**DEFAULT_ENV)
         self.update(**kw)
 
@@ -33,6 +36,32 @@ class NexilesEnv(dict):
     def __getattr__(self, k):
         return self[k]
 
+
+def read_from_file(fn):
+    """read_from_file(filename) -> env
+
+    Reads config from given filename and updates
+    the environment.
+
+    Creates a new environmant if none is found.
+    """
+    with file(fn) as config:
+        return read_from_string(config.read())
+
+
+def read_from_string(s):
+    """read_from_string(string) -> env
+
+    Parses JSON from s and updates env.  Returns
+    new env if none found.
+    """
+    e = env.setdefault("nexiles", NexilesEnv())
+
+    e.update(**json.loads(s))
+
+    return e
+
+
 @task
 def dump():
     """dumps nexiles specific fabric environment"""
@@ -40,4 +69,14 @@ def dump():
         print "{:>30} := {}".format(k, v)
 
 if "nexiles" not in env:
+    log.info("Initializing environment.")
     env.nexiles = NexilesEnv()
+    if os.path.exists("fabric.json"):
+        log.info("Loading fabric env from fabric.json")
+        try:
+            read_from_file("fabric.json")
+        except ValueError, e:
+            log.error("Invalid JSON in fabric.json!")
+            raise
+
+# EOF

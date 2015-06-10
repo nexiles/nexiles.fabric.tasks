@@ -23,7 +23,6 @@ DOC_PACKAGE  = "{BUILD_DIR}/{PACKAGE_NAME}-doc-{VERSION}.tar.gz".format(**global
 PUBLIC_DIR   = "/Volumes/skynet-wt-10-2/ptc/Windchill_10.2/HTTPServer/htdocs/docs/{PACKAGE_NAME}".format(**globals())
 
 env.nexiles.update(
-    public_source=True,
     package_name=PACKAGE_NAME,
     version=VERSION,
     root_dir=ROOT_DIR,
