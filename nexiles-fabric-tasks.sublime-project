@@ -4,5 +4,8 @@
 		{
 			"path": "."
 		}
-	]
+	],
+	"settings": {
+        "python_interpreter_path": "/Users/seletz/.virtualenvs/nexiles.fabric.tasks/bin/python"
+    }
 }
