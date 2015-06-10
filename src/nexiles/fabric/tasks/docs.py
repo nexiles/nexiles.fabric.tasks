@@ -9,11 +9,13 @@ from fabric.api import local
 from . import log
 from . import utils
 
+
 @task
 def build():
     """build project documentation"""
     with lcd("docs"):
         local("make html")
+
 
 @task
 @utils.Requires(doc_package=str)
@@ -22,11 +24,13 @@ def package():
     with lcd("docs/_build/html"):
         local("tar czf {doc_package} .".format(**env.nexiles))
 
+
 @task
 @utils.Requires(root_dir=str)
 def preview():
     """preview project documentation"""
     webbrowser.open("file://{root_dir}/docs/_build/html/index.html".format(**env.nexiles))
+
 
 @task
 @utils.Requires(doc_public_dir=str)
@@ -40,3 +44,5 @@ def publish():
     local("mkdir -p {}".format(env.nexiles.doc_public_dir))
     with lcd("docs/_build/html"):
         local("rsync -rv * {doc_public_dir}".format(**env.nexiles))
+
+# EOF

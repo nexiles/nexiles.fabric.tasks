@@ -49,3 +49,5 @@ def get_version_from_setup_py():
         for line in f:
             if line.startswith("version"):
                 return re.split("version = '(.*)'", line)[1]
+
+# EOF
