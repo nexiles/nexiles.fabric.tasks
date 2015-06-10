@@ -63,6 +63,13 @@ def setup_classpath():
     classpath = os.environ["CLASSPATH"] = ":".join(all_jars)
     return classpath
 
+def get_package_env(which=None):
+    """Return env for specific package"""
+    if which is None:
+        return env.nexiles
+
+    return env.nexiles[which]
+
 ##############################################################################
 # Tasks
 ##############################################################################
@@ -84,15 +91,21 @@ def classpath():
 
 
 @task
-@utils.Requires(WT_HOME=str, WT_HOST=str, WTUSER=str, WTPASS=str, JYTHON_HOME=str)
+@utils.Requires(build_dir=str, WT_HOME=str, WT_HOST=str, WTUSER=str, WTPASS=str, JYTHON_HOME=str)
 def build_gateway_module(which=None):
     """Build gateway module."""
     if which is None:
+        package = get_package_env()
         which = env.nexiles.package_name
+    else:
+        package = get_package_env(which)
 
     log.info("Building {}".format(which))
 
     setup_classpath()
+
+    with lcd(package.package_dir):
+        local("jython setup.py bdist_egg --exclude-source-files -d {}".format(env.nexiles.build_dir))
 
 
 
