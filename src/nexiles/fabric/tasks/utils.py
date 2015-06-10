@@ -6,6 +6,7 @@ import functools
 
 from . import log
 
+
 class Requires(object):
     """Decorator to document environment usage.
 
@@ -30,6 +31,7 @@ class Requires(object):
     def __call__(self, func):
         # log.info("Requires.__call__: {} {}".format(repr(self), self.docs))
         func.__doc__ += self.docs
+
         @functools.wraps(func)
         def wrapper(*args, **kw):
             for k, v in self.kw.items():
@@ -41,11 +43,14 @@ class Requires(object):
 
         return wrapper
 
-def get_version_from_setup_py():
+
+def get_version_from_setup_py(filename=None):
     """get_version_from_setup_py() -> string
 
     Extract and return the version form the setup.py file."""
-    with file("setup.py") as f:
+    if filename is None:
+        filename = "setup.py"
+    with file(filename) as f:
         for line in f:
             if line.startswith("version"):
                 return re.split("version = '(.*)'", line)[1]
