@@ -148,6 +148,26 @@ def list_eggs(which=None):
 
 
 @task
+@utils.Requires(build_dir=str, dist_root=str)
+def dist_eggs(which=None):
+    """Copy built eggs to dist dir."""
+    package = get_package_env(which)
+    eggs = get_package_eggs(package)
+
+    root = get_gw_module_dist_root_dir(package)
+    dist = os.path.join(root, "{package_name}-{version}".format(**package))
+    package["dist_dir"] = dist
+    with hide("running"):
+        local("mkdir -p {}".format(dist))
+
+    log.info("Distributing {} version {}".format(which, package.version))
+    for egg in eggs:
+        log.info("   {}".format(os.path.basename(egg)))
+        with hide("running"):
+            local("cp {} {}".format(egg, dist))
+
+
+@task
 @utils.Requires(build_dir=str, WT_HOME=str, WT_HOST=str, WTUSER=str, WTPASS=str, JYTHON_HOME=str)
 def build_eggs(which=None):
     """Build gateway module."""

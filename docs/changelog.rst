@@ -17,6 +17,8 @@ Enhancements
 
 - Environment default values, :ref:`env`
 
+- New task: `gateway.dist_eggs`
+
 
 0.1.3 - 2015-06-10
 ==================

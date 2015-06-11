@@ -98,6 +98,35 @@ Example
 
 	Done.
 
+Task: dist_eggs
+===============
+
+Purpose
+-------
+
+Copy built gateway modules to dist location.
+
+Usage
+-----
+
+::
+
+	fab gateway.dist_eggs
+
+Example
+-------
+
+::
+
+	$ fab gateway.dist_eggs
+	Loading fabric env from fabric.json
+	Initializing environment.
+	Distributing None version 1.0.0
+	   nexiles.gateway.example-1.0.0-py2.7-nexiles.egg
+	   nexiles.gateway.example-1.0.0-py2.7-acme.egg
+
+	Done.
+
 
 Module Documentation
 ====================
