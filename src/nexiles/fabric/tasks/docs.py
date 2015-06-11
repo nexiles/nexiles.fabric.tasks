@@ -4,6 +4,7 @@ import webbrowser
 from fabric.api import env
 from fabric.api import lcd
 from fabric.api import task
+from fabric.api import hide
 from fabric.api import local
 
 from . import log
@@ -13,16 +14,28 @@ from . import utils
 @task
 def build():
     """build project documentation"""
-    with lcd("docs"):
+    log.info("Building documentation for {package_name} version {version}".format(**env.nexiles))
+    with lcd("docs"), hide("running", "stdout"):
         local("make html")
 
 
 @task
-@utils.Requires(doc_package=str)
+@utils.Requires(build_dir=str, root_dir=str)
 def package():
     """package project documentation"""
-    with lcd("docs/_build/html"):
+    log.info("Packaging documentation for {package_name} version {version}".format(**env.nexiles))
+    with lcd("docs/_build/html"), hide("running"):
         local("tar czf {doc_package} .".format(**env.nexiles))
+
+
+@task
+@utils.Requires(dist_dir=str)
+def dist():
+    """distribute project documentation"""
+    log.info("Distributing documentation for {package_name} version {version}".format(**env.nexiles))
+    with hide("running"):
+        log.info("   {}".format(os.path.basename(env.nexiles.doc_package)))
+        local("cp {doc_package} {dist_dir}".format(**env.nexiles))
 
 
 @task

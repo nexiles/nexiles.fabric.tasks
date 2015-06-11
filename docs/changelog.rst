@@ -7,7 +7,16 @@ Change Log
 0.1.4 - unreleased
 ==================
 
-no changes yet.
+Features
+--------
+
+- Optional logging to a log file.
+
+Enhancements
+------------
+
+- Environment default values, :ref:`env`
+
 
 0.1.3 - 2015-06-10
 ==================

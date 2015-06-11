@@ -10,12 +10,10 @@ from fabric.api import lcd
 from fabric.api import task
 from fabric.api import hide
 from fabric.api import local
-from fabric.api import execute
 
 
 from . import log
 from . import utils
-from . import environment
 from . import windchill
 
 
@@ -27,9 +25,11 @@ from . import windchill
 def get_package_env(which=None):
     """Return env for specific package"""
     if which is None:
-        return env.nexiles
+        e = env.nexiles
+    else:
+        e = env.nexiles[which]
 
-    return env.nexiles[which]
+    return e
 
 
 def generate_manifest(name, p, h=None):
@@ -126,6 +126,11 @@ LICENSE = {
     add_manifest(package, manifest, egg_name_customer)
 
     package.setdefault("built_eggs", []).append(egg_name_customer)
+
+
+def get_gw_module_dist_root_dir(package):
+    ""
+    return os.path.join(env.nexiles.dist_root, "nexiles.gateway.services", package.import_name.split(".")[-1])
 
 ##############################################################################
 # Tasks
