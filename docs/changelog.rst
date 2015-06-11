@@ -12,12 +12,14 @@ Features
 
 - Optional logging to a log file.
 
+- New task: `gateway.dist_eggs`
+
 Enhancements
 ------------
 
 - Environment default values, :ref:`env`
 
-- New task: `gateway.dist_eggs`
+- Task `release.github` now detects prerelease versions.
 
 
 0.1.3 - 2015-06-10

@@ -6,11 +6,19 @@ from . import log
 from . import utils
 
 
+def prerelease_p(version):
+    return "dev" in version or "rc" in version
+
+
 @task
 @utils.Requires(version=str, package_name=str, doc_package=str)
 def github():
     """Release on github"""
-    local("github-release release -u nexiles -r {0} --tag v{1} --name '{0} -- v{1}'".format(env.nexiles.package_name, env.nexiles.version))
+    if prerelease_p(env.nexiles.version):
+        local("github-release release -u nexiles -r {0} --tag v{1} --name '{0} -- v{1}'".format(env.nexiles.package_name, env.nexiles.version))
+    else:
+        local("github-release release -u nexiles --prerelease -r {0} --tag v{1} --name '{0} -- v{1}'".format(env.nexiles.package_name, env.nexiles.version))
+
     local("github-release upload -u nexiles -r {0} --tag v{1} --name documentation --file {2}".format(
         env.nexiles.package_name, env.nexiles.version, env.nexiles.doc_package))
 
