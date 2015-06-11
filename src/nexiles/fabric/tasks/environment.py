@@ -86,8 +86,9 @@ class NexilesEnv(object):
                 log.warning("   {} not set, using default: {}".format(k, val))
                 self.data[k] = val
                 return val
-            except KeyError:
-                raise KeyError(k)
+            except KeyError, e:
+                self.logger.error("Exception when trying to set default", exc_info=True)
+                raise
         return self.data.__getitem__(k)
 
     def __setitem__(self, k, v):
