@@ -7,7 +7,13 @@ Change Log
 0.1.5 - unreleased
 ==================
 
-No changes yet.
+Bugfixes
+--------
+
+- [gateway tasks] Fix a bug in dist task where we display garbage.
+
+  https://github.com/nexiles/nexiles.fabric.tasks/issues/1
+
 
 0.1.4 - 2015-06-11
 ==================

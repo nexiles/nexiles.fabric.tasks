@@ -152,6 +152,9 @@ def list_eggs(which=None):
 def dist_eggs(which=None):
     """Copy built eggs to dist dir."""
     package = get_package_env(which)
+    if which is None:
+        which = env.nexiles.package_name
+
     eggs = get_package_eggs(package)
 
     root = get_gw_module_dist_root_dir(package)
