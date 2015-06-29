@@ -165,7 +165,7 @@ def dist_eggs(which=None):
 
     log.info("Distributing {} version {}".format(which, package.version))
     for egg in eggs:
-        log.info("   {}".format(os.path.basename(egg)))
+        log.info("   {:<50} -> {}".format(os.path.basename(egg), dist))
         with hide("running"):
             local("cp {} {}".format(egg, dist))
 
